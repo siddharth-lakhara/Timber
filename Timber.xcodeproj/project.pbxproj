@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		42122EE3259303C0005EC58E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42122EE2259303C0005EC58E /* main.cpp */; };
+		42122F0B25931075005EC58E /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122EFE25931075005EC58E /* sfml-graphics.framework */; };
+		42122F0C25931075005EC58E /* vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122EFF25931075005EC58E /* vorbis.framework */; };
+		42122F0D25931075005EC58E /* sfml-audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0025931075005EC58E /* sfml-audio.framework */; };
+		42122F0E25931075005EC58E /* FLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0125931075005EC58E /* FLAC.framework */; };
+		42122F0F25931075005EC58E /* freetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0225931075005EC58E /* freetype.framework */; };
+		42122F1025931075005EC58E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0325931075005EC58E /* OpenAL.framework */; };
+		42122F1125931075005EC58E /* SFML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0425931075005EC58E /* SFML.framework */; };
+		42122F1225931075005EC58E /* vorbisfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0525931075005EC58E /* vorbisfile.framework */; };
+		42122F1325931075005EC58E /* vorbisenc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0625931075005EC58E /* vorbisenc.framework */; };
+		42122F1425931075005EC58E /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0725931075005EC58E /* sfml-system.framework */; };
+		42122F1525931075005EC58E /* ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0825931075005EC58E /* ogg.framework */; };
+		42122F1625931075005EC58E /* sfml-network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0925931075005EC58E /* sfml-network.framework */; };
+		42122F1725931075005EC58E /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42122F0A25931075005EC58E /* sfml-window.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +38,24 @@
 /* Begin PBXFileReference section */
 		42122EDF259303C0005EC58E /* Timber */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Timber; sourceTree = BUILT_PRODUCTS_DIR; };
 		42122EE2259303C0005EC58E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		42122EEC25930AB5005EC58E /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
+		42122EED25930AB5005EC58E /* libsfml-graphics.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-graphics.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-graphics.2.5.1.dylib"; sourceTree = "<group>"; };
+		42122EEE25930AB5005EC58E /* libsfml-network.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-network.2.5.1.dylib"; sourceTree = "<group>"; };
+		42122EEF25930AB5005EC58E /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
+		42122EF025930AB5005EC58E /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "ExternalLibraries/SFML/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
+		42122EFE25931075005EC58E /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../../../Library/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
+		42122EFF25931075005EC58E /* vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vorbis.framework; path = ../../../../../Library/Frameworks/vorbis.framework; sourceTree = "<group>"; };
+		42122F0025931075005EC58E /* sfml-audio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-audio.framework"; path = "../../../../../Library/Frameworks/sfml-audio.framework"; sourceTree = "<group>"; };
+		42122F0125931075005EC58E /* FLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAC.framework; path = ../../../../../Library/Frameworks/FLAC.framework; sourceTree = "<group>"; };
+		42122F0225931075005EC58E /* freetype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = freetype.framework; path = ../../../../../Library/Frameworks/freetype.framework; sourceTree = "<group>"; };
+		42122F0325931075005EC58E /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = ../../../../../Library/Frameworks/OpenAL.framework; sourceTree = "<group>"; };
+		42122F0425931075005EC58E /* SFML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SFML.framework; path = ../../../../../Library/Frameworks/SFML.framework; sourceTree = "<group>"; };
+		42122F0525931075005EC58E /* vorbisfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vorbisfile.framework; path = ../../../../../Library/Frameworks/vorbisfile.framework; sourceTree = "<group>"; };
+		42122F0625931075005EC58E /* vorbisenc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vorbisenc.framework; path = ../../../../../Library/Frameworks/vorbisenc.framework; sourceTree = "<group>"; };
+		42122F0725931075005EC58E /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../../../Library/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
+		42122F0825931075005EC58E /* ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ogg.framework; path = ../../../../../Library/Frameworks/ogg.framework; sourceTree = "<group>"; };
+		42122F0925931075005EC58E /* sfml-network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-network.framework"; path = "../../../../../Library/Frameworks/sfml-network.framework"; sourceTree = "<group>"; };
+		42122F0A25931075005EC58E /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "../../../../../Library/Frameworks/sfml-window.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +63,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42122F0B25931075005EC58E /* sfml-graphics.framework in Frameworks */,
+				42122F0C25931075005EC58E /* vorbis.framework in Frameworks */,
+				42122F0D25931075005EC58E /* sfml-audio.framework in Frameworks */,
+				42122F0E25931075005EC58E /* FLAC.framework in Frameworks */,
+				42122F0F25931075005EC58E /* freetype.framework in Frameworks */,
+				42122F1025931075005EC58E /* OpenAL.framework in Frameworks */,
+				42122F1125931075005EC58E /* SFML.framework in Frameworks */,
+				42122F1225931075005EC58E /* vorbisfile.framework in Frameworks */,
+				42122F1325931075005EC58E /* vorbisenc.framework in Frameworks */,
+				42122F1425931075005EC58E /* sfml-system.framework in Frameworks */,
+				42122F1525931075005EC58E /* ogg.framework in Frameworks */,
+				42122F1625931075005EC58E /* sfml-network.framework in Frameworks */,
+				42122F1725931075005EC58E /* sfml-window.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +87,7 @@
 			children = (
 				42122EE1259303C0005EC58E /* Timber */,
 				42122EE0259303C0005EC58E /* Products */,
+				42122EEB25930AB5005EC58E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +105,31 @@
 				42122EE2259303C0005EC58E /* main.cpp */,
 			);
 			path = Timber;
+			sourceTree = "<group>";
+		};
+		42122EEB25930AB5005EC58E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42122F0125931075005EC58E /* FLAC.framework */,
+				42122F0225931075005EC58E /* freetype.framework */,
+				42122F0825931075005EC58E /* ogg.framework */,
+				42122F0325931075005EC58E /* OpenAL.framework */,
+				42122F0025931075005EC58E /* sfml-audio.framework */,
+				42122EFE25931075005EC58E /* sfml-graphics.framework */,
+				42122F0925931075005EC58E /* sfml-network.framework */,
+				42122F0725931075005EC58E /* sfml-system.framework */,
+				42122F0A25931075005EC58E /* sfml-window.framework */,
+				42122F0425931075005EC58E /* SFML.framework */,
+				42122EFF25931075005EC58E /* vorbis.framework */,
+				42122F0625931075005EC58E /* vorbisenc.framework */,
+				42122F0525931075005EC58E /* vorbisfile.framework */,
+				42122EEF25930AB5005EC58E /* libsfml-audio.2.5.1.dylib */,
+				42122EED25930AB5005EC58E /* libsfml-graphics.2.5.1.dylib */,
+				42122EEE25930AB5005EC58E /* libsfml-network.2.5.1.dylib */,
+				42122EF025930AB5005EC58E /* libsfml-system.2.5.1.dylib */,
+				42122EEC25930AB5005EC58E /* libsfml-window.2.5.1.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +310,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExternalLibraries/SFML/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -248,6 +327,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExternalLibraries/SFML/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
