@@ -16,7 +16,9 @@ using namespace sf;
 const string baseFolder = "/Users/slakhara/personal/game-dev/Timber/Timber/";
 
 int main() {
-    VideoMode vm(1680, 1048);
+    const int screenWidth = 1680;
+    const int screenHeight = 1048;
+    VideoMode vm(screenWidth, screenHeight);
     RenderWindow window(vm, "Timber", Style::Default);
 
     Texture textureBg;
@@ -78,13 +80,25 @@ int main() {
           textRect.left + textRect.width/2.0f,
           textRect.top + textRect.height/2.0f
       );
-    msgText.setPosition(1680/2.0f, 1048/2.0f);
+    msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
     
     scoreText.setFont(font);
     scoreText.setString("Score = 0");
     scoreText.setCharacterSize(100);
     scoreText.setFillColor(Color::White);
     scoreText.setPosition(20, 20);
+    
+//    Time bar
+    RectangleShape timeBar;
+    float timeBarStartWidth = 400;
+    float timeBarHeight = 80;
+    timeBar.setSize(Vector2f(timeBarStartWidth, timeBarHeight));
+    timeBar.setFillColor(Color::Red);
+    timeBar.setPosition(screenWidth/2 - timeBarStartWidth/2, 980);
+    
+    Time gameTimeTotal;
+    float timeRemaining = 6.0f;
+    float timeBarWidthPerSecond = timeBarStartWidth/timeRemaining;
     
     while (window.isOpen()) {
         Event evt;
@@ -99,6 +113,19 @@ int main() {
                         window.close();
                     } else if (evt.key.code == Keyboard::Return) {
                         isGamePaused = !isGamePaused;
+                        
+                        if (timeRemaining <= 0.0f) {
+//                            Restart the game
+                            score = 0;
+                            msgText.setString("Press Enter to start!");
+                            FloatRect textRect = msgText.getLocalBounds();
+                            msgText.setOrigin(
+                                  textRect.left + textRect.width/2.0f,
+                                  textRect.top + textRect.height/2.0f
+                              );
+                            msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
+                            timeRemaining = 6.0f;
+                        }
                     }
                     cout << "Key press detected: ";
                     cout << evt.key.code << endl;
@@ -110,6 +137,22 @@ int main() {
         
         Time dt = clock.restart();
         if (!isGamePaused) {
+            timeRemaining -= dt.asSeconds();
+            timeBar.setSize(Vector2f(
+                     timeBarWidthPerSecond*timeRemaining, timeBarHeight
+             ));
+            
+            if (timeRemaining <= 0.0f) {
+                isGamePaused = true;
+                msgText.setString("Out of time!");
+                FloatRect textRect = msgText.getLocalBounds();
+                msgText.setOrigin(
+                      textRect.left+textRect.width/2.0f,
+                      textRect.top + textRect.height/2.0f
+                );
+                msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
+            }
+            
             if (!isBeeActive) {
     //            Initialise Bee variables
     //            Bee speed
@@ -151,7 +194,7 @@ int main() {
                              spriteCloud1.getPosition().y
                 );
                 
-                if (spriteCloud1.getPosition().x > 1680) {
+                if (spriteCloud1.getPosition().x > screenWidth) {
                     isCloud1Active = false;
                 }
             }
@@ -174,7 +217,7 @@ int main() {
                              spriteCloud2.getPosition().y
                 );
 
-                if (spriteCloud2.getPosition().x > 1680) {
+                if (spriteCloud2.getPosition().x > screenWidth) {
                     isCloud2Active = false;
                 }
             }
@@ -197,7 +240,7 @@ int main() {
                              spriteCloud3.getPosition().y
                 );
 
-                if (spriteCloud3.getPosition().x > 1680) {
+                if (spriteCloud3.getPosition().x > screenWidth) {
                     isCloud3Active = false;
                 }
             }
@@ -206,8 +249,6 @@ int main() {
             ss << "Score = " << score;
             scoreText.setString(ss.str());
         }
-        
-        
 
         window.clear();
         window.draw(spriteBg);
@@ -220,6 +261,7 @@ int main() {
         if (isGamePaused) {
             window.draw(msgText);
         }
+        window.draw(timeBar);
         window.display();
     }
     return 0;
