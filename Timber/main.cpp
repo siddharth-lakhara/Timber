@@ -15,6 +15,13 @@ using namespace sf;
 
 const string baseFolder = "/Users/slakhara/personal/game-dev/Timber/Timber/";
 
+void updateBranch(int seed);
+const int NUM_BRANCHES = 6;
+Sprite branches[NUM_BRANCHES];
+
+enum class side {LEFT, RIGHT, NONE};
+side branchPositions[NUM_BRANCHES];
+
 int main() {
     const int screenWidth = 1680;
     const int screenHeight = 1048;
@@ -99,6 +106,22 @@ int main() {
     Time gameTimeTotal;
     float timeRemaining = 6.0f;
     float timeBarWidthPerSecond = timeBarStartWidth/timeRemaining;
+    
+    Texture textureBranch;
+    textureBranch.loadFromFile(baseFolder + "graphics/branch.png");
+    
+    for (int i=0; i<NUM_BRANCHES; i++) {
+        branches[i].setTexture(textureBranch);
+        branches[i].setPosition(-2000, -2000);
+//        Set origin to center of sprite
+        branches[i].setPosition(220, 40);
+    }
+    
+    updateBranch(1);
+    updateBranch(2);
+    updateBranch(3);
+    updateBranch(4);
+    updateBranch(5);
     
     while (window.isOpen()) {
         Event evt;
@@ -248,6 +271,19 @@ int main() {
             stringstream ss;
             ss << "Score = " << score;
             scoreText.setString(ss.str());
+            
+            for (int i=0; i<NUM_BRANCHES; i++) {
+                float height = i*150;
+                if (branchPositions[i] == side::LEFT) {
+                    branches[i].setPosition(700, height);
+                    branches[i].setRotation(180);
+                } else if (branchPositions[i] == side::RIGHT) {
+                    branches[i].setPosition(995, height);
+                    branches[i].setRotation(0);
+                } else {
+                    branches[i].setPosition(3000, height);
+                }
+            }
         }
 
         window.clear();
@@ -262,7 +298,30 @@ int main() {
             window.draw(msgText);
         }
         window.draw(timeBar);
+        for (int i=0; i<NUM_BRANCHES; i++) {
+            window.draw(branches[i]);
+        }
         window.display();
     }
     return 0;
+}
+
+void updateBranch(int seed) {
+    for (int i = NUM_BRANCHES-1; i>0; i--) {
+        branchPositions[i] = branchPositions[i-1];
+    }
+    
+    srand((int)time(0) + seed);
+    int r = rand()%5;
+    switch (r) {
+        case 0:
+            branchPositions[0] = side::LEFT;
+            break;
+        case 1:
+            branchPositions[0] = side::RIGHT;
+            break;
+        default:
+            branchPositions[0] = side::NONE;
+            break;
+    }
 }
