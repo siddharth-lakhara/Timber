@@ -56,6 +56,8 @@ int main() {
     float cloud2Speed = 0.0f;
     float cloud3Speed = 0.0f;
     
+    Clock clock;
+    
     while (window.isOpen()) {
         Event evt;
 
@@ -71,6 +73,100 @@ int main() {
                     break;
                 default:
                     break;
+            }
+        }
+        
+        Time dt = clock.restart();
+        
+        if (!isBeeActive) {
+//            Initialise Bee variables
+//            Bee speed
+            srand( (int)time(0) );
+            beeSpeed = (rand() % 200) + 200;
+            
+//            Bee height
+            srand( (int)time(0)*10 );
+            float beeHeight = (rand() % 500) + 500;
+            spriteBee.setPosition(2000, beeHeight);
+            isBeeActive = true;
+        } else {
+//            Move Bee
+            spriteBee.setPosition(
+                      spriteBee.getPosition().x - beeSpeed*dt.asSeconds(),
+                      spriteBee.getPosition().y
+            );
+            
+            if (spriteBee.getPosition().x < -100) {
+                isBeeActive = false;
+            }
+        }
+        
+        if (!isCloud1Active) {
+//            Initialise Cloud1 variables
+//            Cloud speed
+            srand( (int)time(0)*10 );
+            cloud1Speed = (rand() % 200);
+            
+//            Cloud height
+            srand( (int)time(0)*10 );
+            float cloud1Height = (rand() % 150);
+            spriteCloud1.setPosition(-200, cloud1Height);
+            isCloud1Active = true;
+        } else {
+//            Move Cloud
+            spriteCloud1.setPosition(
+                         spriteCloud1.getPosition().x + cloud1Speed*dt.asSeconds(),
+                         spriteCloud1.getPosition().y
+            );
+            
+            if (spriteCloud1.getPosition().x > 1680) {
+                isCloud1Active = false;
+            }
+        }
+        
+        if (!isCloud2Active) {
+//            Initialise Cloud2 variables
+//            Cloud speed
+            srand( (int)time(0)*20 );
+            cloud2Speed = (rand() % 200);
+
+//            Cloud height
+            srand( (int)time(0)*20 );
+            float cloud2Height = (rand() % 200) - 50;
+            spriteCloud2.setPosition(-200, cloud2Height);
+            isCloud2Active = true;
+        } else {
+//            Move Cloud
+            spriteCloud2.setPosition(
+                         spriteCloud2.getPosition().x + cloud2Speed*dt.asSeconds(),
+                         spriteCloud2.getPosition().y
+            );
+
+            if (spriteCloud2.getPosition().x > 1680) {
+                isCloud2Active = false;
+            }
+        }
+
+        if (!isCloud3Active) {
+//            Initialise Cloud3 variables
+//            Cloud speed
+            srand( (int)time(0)*30 );
+            cloud3Speed = (rand() % 200);
+
+//            Cloud height
+            srand( (int)time(0)*30 );
+            float cloud3Height = (rand() % 250) - 50;
+            spriteCloud3.setPosition(-200, cloud3Height);
+            isCloud3Active = true;
+        } else {
+//            Move Cloud
+            spriteCloud3.setPosition(
+                         spriteCloud3.getPosition().x + cloud3Speed*dt.asSeconds(),
+                         spriteCloud3.getPosition().y
+            );
+
+            if (spriteCloud3.getPosition().x > 1680) {
+                isCloud3Active = false;
             }
         }
 
