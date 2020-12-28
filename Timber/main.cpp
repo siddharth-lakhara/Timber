@@ -9,6 +9,7 @@
 #include <string>
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 using namespace std;
 using namespace sf;
@@ -161,6 +162,21 @@ int main() {
     bool isAcceptingInput = true;
     bool isGameInitialised = false;
     
+    SoundBuffer chopBuffer;
+    chopBuffer.loadFromFile(baseFolder + "sound/chop.wav");
+    Sound chop;
+    chop.setBuffer(chopBuffer);
+    
+    SoundBuffer deathBuffer;
+    deathBuffer.loadFromFile(baseFolder + "sound/death.wav");
+    Sound death;
+    death.setBuffer(deathBuffer);
+    
+    SoundBuffer ootBuffer;
+    ootBuffer.loadFromFile(baseFolder + "sound/out_of_time.wav");
+    Sound outOfTime;
+    outOfTime.setBuffer(ootBuffer);
+    
     while (window.isOpen()) {
         Event evt;
 
@@ -214,6 +230,8 @@ int main() {
                             logSpeedX = -5000;
                             isLogActive = true;
                             isAcceptingInput = false;
+                            
+                            chop.play();
                         }
                         
                         else if (evt.key.code == Keyboard::Left) {
@@ -230,6 +248,8 @@ int main() {
                             logSpeedX = 5000;
                             isLogActive = true;
                             isAcceptingInput = false;
+                            
+                            chop.play();
                         }
                     }
                     
@@ -262,6 +282,7 @@ int main() {
                       textRect.top + textRect.height/2.0f
                 );
                 msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
+                outOfTime.play();
             }
             
             if (!isBeeActive) {
@@ -385,6 +406,7 @@ int main() {
                       textRect.top + textRect.height/2
                   );
                 msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
+                death.play();
             }
             
             stringstream ss;
