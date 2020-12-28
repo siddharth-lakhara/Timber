@@ -123,6 +123,38 @@ int main() {
     updateBranch(4);
     updateBranch(5);
     
+    Texture texturePlayer;
+    texturePlayer.loadFromFile(baseFolder + "graphics/player.png");
+    Sprite spritePlayer;
+    spritePlayer.setTexture(texturePlayer);
+    spritePlayer.setPosition(520, 720);
+    side playerSide = side::LEFT;
+    
+    Texture textureRIP;
+    textureRIP.loadFromFile(baseFolder + "graphics/rip.png");
+    Sprite spriteRIP;
+    spriteRIP.setTexture(textureRIP);
+    spriteRIP.setPosition(520, 860);
+    
+    Texture textureAxe;
+    textureAxe.loadFromFile(baseFolder + "graphics/axe.png");
+    Sprite spriteAxe;
+    spriteAxe.setTexture(textureAxe);
+    spriteAxe.setPosition(630, 830);
+    
+    const float axePositionLeft = 630;
+    const float axePositionRight = 1075;
+    
+    Texture textureLog;
+    textureLog.loadFromFile(baseFolder + "graphics/log.png");
+    Sprite spriteLog;
+    spriteLog.setTexture(textureLog);
+    spriteLog.setPosition(700, 780);
+    
+    bool isLogActive = false;
+    float logSpeedX = 1000;
+    float logSpeedY = -1500;
+    
     while (window.isOpen()) {
         Event evt;
 
@@ -288,11 +320,15 @@ int main() {
 
         window.clear();
         window.draw(spriteBg);
-        window.draw(spriteTree);
-        window.draw(spriteBee);
         window.draw(spriteCloud1);
         window.draw(spriteCloud2);
         window.draw(spriteCloud3);
+        window.draw(spriteTree);
+        window.draw(spriteBee);
+        window.draw(spritePlayer);
+        window.draw(spriteAxe);
+        window.draw(spriteLog);
+        window.draw(spriteRIP);
         window.draw(scoreText);
         if (isGamePaused) {
             window.draw(msgText);
