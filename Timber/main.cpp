@@ -129,7 +129,7 @@ int main() {
     texturePlayer.loadFromFile(baseFolder + "graphics/player.png");
     Sprite spritePlayer;
     spritePlayer.setTexture(texturePlayer);
-    spritePlayer.setPosition(playerPositionRight, 720);
+    spritePlayer.setPosition(playerPositionLeft, 720);
     side playerSide = side::LEFT;
     
     Texture textureRIP;
@@ -144,10 +144,9 @@ int main() {
     textureAxe.loadFromFile(baseFolder + "graphics/axe.png");
     Sprite spriteAxe;
     spriteAxe.setTexture(textureAxe);
-    spriteAxe.setPosition(axePositionRight, 830);
+    spriteAxe.setPosition(axePositionLeft, 830);
     
     const float logPositionLeft = 700;
-    const float logPositionRight = 810;
     const float logHeight = 780;
     Texture textureLog;
     textureLog.loadFromFile(baseFolder + "graphics/log.png");
@@ -176,7 +175,7 @@ int main() {
                     } else if (evt.key.code == Keyboard::Return) {
                         isGamePaused = !isGamePaused;
                         
-                        if (timeRemaining <= 0.0f) {
+                        if (timeRemaining <= 0.0f || !isGameInitialised) {
 //                            Restart the game
                             score = 0;
                             msgText.setString("Press Enter to start!");
@@ -187,17 +186,14 @@ int main() {
                               );
                             msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
                             timeRemaining = 6.0f;
-                            isGameInitialised = false;
-                        }
-                        
-                        if (!isGameInitialised) {
                             for (int i=1; i<NUM_BRANCHES; i++) {
                                 branchPositions[i] = side::NONE;
                             }
                             
                             spriteRIP.setPosition(6756, 2000);
+                            spritePlayer.setPosition(playerPositionLeft, 720);
+                            spriteAxe.setPosition(axePositionLeft, 830);
 
-                            isAcceptingInput = true;
                             isGameInitialised = true;
                         }
                     }
@@ -214,7 +210,7 @@ int main() {
                             spritePlayer.setPosition(playerPositionRight, spritePlayer.getPosition().y);
                             
                             updateBranch(score);
-                            spriteLog.setPosition(logPositionRight, logHeight);
+                            spriteLog.setPosition(logPositionLeft, logHeight);
                             logSpeedX = -5000;
                             isLogActive = true;
                             isAcceptingInput = false;
@@ -373,6 +369,22 @@ int main() {
                     spriteLog.setPosition(logPositionLeft, logHeight);
                 }
                 
+            }
+            
+            if (branchPositions[5] == playerSide) {
+                isGamePaused = true;
+                isAcceptingInput = false;
+                isGameInitialised = false;
+                spriteRIP.setPosition(520, 860);
+                spritePlayer.setPosition(2000, 660);
+                spriteAxe.setPosition(2000, 660);
+                msgText.setString("Squished !!");
+                FloatRect textRect = msgText.getLocalBounds();
+                msgText.setOrigin(
+                      textRect.left + textRect.width/2,
+                      textRect.top + textRect.height/2
+                  );
+                msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
             }
             
             stringstream ss;
