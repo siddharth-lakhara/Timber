@@ -123,11 +123,13 @@ int main() {
     updateBranch(4);
     updateBranch(5);
     
+    const float playerPositionLeft = 520;
+    const float playerPositionRight = 1050;
     Texture texturePlayer;
     texturePlayer.loadFromFile(baseFolder + "graphics/player.png");
     Sprite spritePlayer;
     spritePlayer.setTexture(texturePlayer);
-    spritePlayer.setPosition(520, 720);
+    spritePlayer.setPosition(playerPositionRight, 720);
     side playerSide = side::LEFT;
     
     Texture textureRIP;
@@ -136,24 +138,29 @@ int main() {
     spriteRIP.setTexture(textureRIP);
     spriteRIP.setPosition(520, 860);
     
+    const float axePositionLeft = 630;
+    const float axePositionRight = 925;
     Texture textureAxe;
     textureAxe.loadFromFile(baseFolder + "graphics/axe.png");
     Sprite spriteAxe;
     spriteAxe.setTexture(textureAxe);
-    spriteAxe.setPosition(630, 830);
+    spriteAxe.setPosition(axePositionRight, 830);
     
-    const float axePositionLeft = 630;
-    const float axePositionRight = 1075;
-    
+    const float logPositionLeft = 700;
+    const float logPositionRight = 810;
+    const float logHeight = 780;
     Texture textureLog;
     textureLog.loadFromFile(baseFolder + "graphics/log.png");
     Sprite spriteLog;
     spriteLog.setTexture(textureLog);
-    spriteLog.setPosition(700, 780);
+    spriteLog.setPosition(logPositionLeft, logHeight);
     
     bool isLogActive = false;
     float logSpeedX = 1000;
     float logSpeedY = -1500;
+    
+    bool isAcceptingInput = true;
+    bool isGameInitialised = false;
     
     while (window.isOpen()) {
         Event evt;
@@ -180,10 +187,63 @@ int main() {
                               );
                             msgText.setPosition(screenWidth/2.0f, screenHeight/2.0f);
                             timeRemaining = 6.0f;
+                            isGameInitialised = false;
+                        }
+                        
+                        if (!isGameInitialised) {
+                            for (int i=1; i<NUM_BRANCHES; i++) {
+                                branchPositions[i] = side::NONE;
+                            }
+                            
+                            spriteRIP.setPosition(6756, 2000);
+
+                            isAcceptingInput = true;
+                            isGameInitialised = true;
                         }
                     }
+                    
+                    if (isAcceptingInput) {
+                        cout << "Accepting input" << endl;
+                        if (evt.key.code == Keyboard::Right) {
+                            playerSide = side::RIGHT;
+                            score++;
+                            
+                            timeRemaining += (2/score) + 0.40;
+                            
+                            spriteAxe.setPosition(axePositionRight, spriteAxe.getPosition().y);
+                            spritePlayer.setPosition(playerPositionRight, spritePlayer.getPosition().y);
+                            
+                            updateBranch(score);
+                            spriteLog.setPosition(logPositionRight, logHeight);
+                            logSpeedX = -5000;
+                            isLogActive = true;
+                            isAcceptingInput = false;
+                        }
+                        
+                        else if (evt.key.code == Keyboard::Left) {
+                            playerSide = side::LEFT;
+                            score++;
+                            
+                            timeRemaining += (2/score) + 0.40;
+                            
+                            spriteAxe.setPosition(axePositionLeft, spriteAxe.getPosition().y);
+                            spritePlayer.setPosition(playerPositionLeft, spritePlayer.getPosition().y);
+                            
+                            updateBranch(score);
+                            spriteLog.setPosition(logPositionLeft, logHeight);
+                            logSpeedX = 5000;
+                            isLogActive = true;
+                            isAcceptingInput = false;
+                        }
+                    }
+                    
                     cout << "Key press detected: ";
                     cout << evt.key.code << endl;
+                    break;
+                case (Event::KeyReleased):
+                    if (!isGamePaused) {
+                        isAcceptingInput = true;
+                    }
                     break;
                 default:
                     break;
@@ -300,6 +360,21 @@ int main() {
                 }
             }
             
+            if (isLogActive) {
+                spriteLog.setPosition(
+                      spriteLog.getPosition().x + (logSpeedX*dt.asSeconds()),
+                      spriteLog.getPosition().y + (logSpeedY*dt.asSeconds())
+                  );
+                
+//                Check if log has flown off screen
+                if (spriteLog.getPosition().x < -100 ||
+                    spriteLog.getPosition().x > 2000) {
+                    isLogActive = false;
+                    spriteLog.setPosition(logPositionLeft, logHeight);
+                }
+                
+            }
+            
             stringstream ss;
             ss << "Score = " << score;
             scoreText.setString(ss.str());
@@ -323,13 +398,12 @@ int main() {
         window.draw(spriteCloud1);
         window.draw(spriteCloud2);
         window.draw(spriteCloud3);
-        window.draw(spriteTree);
         window.draw(spriteBee);
+        window.draw(spriteTree);
+        window.draw(spriteLog);
         window.draw(spritePlayer);
         window.draw(spriteAxe);
-        window.draw(spriteLog);
         window.draw(spriteRIP);
-        window.draw(scoreText);
         if (isGamePaused) {
             window.draw(msgText);
         }
@@ -337,6 +411,7 @@ int main() {
         for (int i=0; i<NUM_BRANCHES; i++) {
             window.draw(branches[i]);
         }
+        window.draw(scoreText);
         window.display();
     }
     return 0;
